@@ -9,6 +9,9 @@ import SubmitCargoInput from "./SubmitCargoInput";
 
 import OriginPointIcon from "../../../Icons/CargoSelectFilters/OriginPointIcon";
 import TransportIcon from "../../../Icons/CargoSelectFilters/TransportIcon";
+import HashTagIcon from "../../../Icons/SubmitCargoIcons/HashTagIcon";
+import ShoppingCartIcon from "../../../Icons/SubmitCargoIcons/ShoppingCartIcon";
+import InputTabs, { Btn } from "./InputTabs";
 
 const SubmitCargoForm = () => {
   const [originFilter, setOriginFilter] = useState("");
@@ -41,6 +44,36 @@ const SubmitCargoForm = () => {
       { value: "Tehran", optTxt: "Tehran" },
     ],
   };
+
+  const [isFreeTanaj, setIsFreeTanaj] = useState(false);
+
+  const [isNegotiobale, setIsNegotiobale] = useState(false);
+
+  const tanajInputTabs: Btn[] = [
+    {
+      text: "تناژ مشخص",
+      btnFnc: () => setIsFreeTanaj(false),
+    },
+    {
+      text: "تناژ آزاد",
+      btnFnc: () => setIsFreeTanaj(true),
+    },
+  ];
+
+  const weightInputTabs: Btn[] = [
+    {
+      text: "صافی",
+      btnFnc: () => setIsNegotiobale(false),
+    },
+    {
+      text: "توفقی",
+      btnFnc: () => setIsNegotiobale(true),
+    },
+    {
+      text: "تن",
+      btnFnc: () => setIsNegotiobale(false),
+    },
+  ];
 
   return (
     <Box>
@@ -89,6 +122,34 @@ const SubmitCargoForm = () => {
               }
               className="flex-grow"
             />
+          </div>
+
+          <div className="w-full flex gap-4 justify-between">
+            <div className="w-full flex flex-col gap-2">
+              
+              <InputTabs btnsDetails={tanajInputTabs} />
+              
+              <SubmitCargoInput
+                disabled={isFreeTanaj}
+                plcHolder="0"
+                inputType="number"
+                className="w-full"
+                icon={HashTagIcon}
+              />
+            </div>
+
+            <div className="w-full flex flex-col gap-2">
+
+            <InputTabs btnsDetails={weightInputTabs} />
+            
+              <SubmitCargoInput
+                disabled={isNegotiobale}
+                plcHolder="0"
+                inputType="number"
+                className="w-full"
+                icon={ShoppingCartIcon}
+              />
+            </div>
           </div>
 
           <SubmitCargoInput

@@ -10,6 +10,7 @@ interface Props {
   className?: string;
   inputType: string;
   icon: ComponentType<IconProps>;
+  disabled?: any;
 }
 
 const SubmitCargoInput = ({
@@ -17,6 +18,7 @@ const SubmitCargoInput = ({
   className,
   icon: Icon,
   inputType,
+  disabled,
 }: Props) => {
   const { light } = useLightStore();
 
@@ -27,6 +29,7 @@ const SubmitCargoInput = ({
       )}
 
       <input
+        disabled={disabled}
         type={inputType}
         placeholder={plcHolder}
         className={` p-4 pr-12 pl-11 w-full rounded-3xl ${
