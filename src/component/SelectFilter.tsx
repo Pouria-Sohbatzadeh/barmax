@@ -1,5 +1,5 @@
 import { ComponentType } from "react";
-import useLightStore from "../../stores/useLightStore";
+import useLightStore from "../stores/useLightStore";
 
 export interface Option {
   value: string;
@@ -16,22 +16,27 @@ interface Props {
     id: string;
     options: Option[];
   };
-  className?: string,
+  className?: string;
   sendSelectedOption: (option: string) => void;
   icon: ComponentType<IconProps>;
 }
 
-const CargoSelectFilter = ({
+const SelectFilter = ({
   selectData,
   sendSelectedOption,
   className,
   icon: Icon,
 }: Props) => {
-
-  const {light} = useLightStore()
+  const { light } = useLightStore();
 
   return (
-    <div className={`relative overflow-hidden ${className ? className : "w-[171px]"}  h-[50px]   rounded-3xl border ${light ? "border-[#f9fafc]" : "border-transparent shadow-md"}  flex items-center gap-2 `}>
+    <div
+      className={`relative overflow-hidden ${
+        className ? className : "w-[171px]"
+      }  h-[50px]   rounded-3xl border ${
+        light ? "border-[#f5f5f7]" : "border-transparent shadow-md"
+      }  flex items-center gap-2 `}
+    >
       {Icon && (
         <Icon className="size-6 absolute right-3 text-[#818286] pointer-events-none" />
       )}
@@ -40,7 +45,9 @@ const CargoSelectFilter = ({
         defaultValue=""
         onChange={(event) => sendSelectedOption(event.target.value)}
         id={selectData.id}
-        className={`appearance-none outline-none text-[14px] w-full h-full cursor-pointer text-[#818286] pr-10 pl-4 ${light ? "" : "bg-[#0e1b2b]"}`}
+        className={`appearance-none outline-none text-[14px] w-full h-[50px] cursor-pointer text-[#818286] pr-10 pl-4 ${
+          light ? "" : "bg-[#0e1b2b]"
+        }`}
       >
         <option value="" disabled>
           {selectData.lblTxt}
@@ -71,4 +78,4 @@ const CargoSelectFilter = ({
   );
 };
 
-export default CargoSelectFilter;
+export default SelectFilter;

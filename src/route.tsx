@@ -7,6 +7,10 @@ import Cargo from "./routing/Cargo/Cargo";
 import SubmitCargoForm from "./routing/Cargo/SubmitCargo/SubmitCargoForm";
 
 import Drivers from "./routing/Drivers/Drivers";
+import TransportCompanies from "./routing/TransportCompanies/TransportCompanies";
+import LetMeKnow from "./routing/LetmeKnow/LetMeKnow";
+import SubmitLetMeKnowForm from "./routing/LetmeKnow/SubmitLetMeKnowForm";
+import SendMessage from "./routing/SendMessage/SendMessage";
 
 const router = createBrowserRouter([
   {
@@ -47,23 +51,32 @@ const router = createBrowserRouter([
         },
       },
       {
-        path: "notice",
-        element: <HomePage />,
+        path: "letmeknow",
+        element: <LetMeKnow />,
         handle: {
           title: "باخبر شو",
         },
       },
 
       {
+        path: "letmeknow/submit",
+        element: <SubmitLetMeKnowForm />,
+        handle: {
+          title: "ثبت باخبر شو",
+          parentTitle: "باخبر شو",
+        },
+      },
+
+      {
         path: "sendMessage",
-        element: <HomePage />,
+        element: <SendMessage />,
         handle: {
           title: "ارسال پیامک",
         },
       },
       {
         path: "transportCompanies",
-        element: <HomePage />,
+        element: <TransportCompanies />,
         handle: {
           title: "متصدیان",
         },

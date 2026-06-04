@@ -1,9 +1,16 @@
-import React from 'react'
+import Box from "../../component/Box";
+import DriversUserFilters from "../../component/DriversUserFilters";
+import DriversTable from "./DriversTable";
 
-const Driver = () => {
+
+const Cargo = () => {
   return (
-    <div>Driver</div>
-  )
-}
+    <Box className="gap-7">
+      <DriversUserFilters />
 
-export default Driver
+      <DriversTable />
+    </Box>
+  );
+};
+
+export default Cargo;

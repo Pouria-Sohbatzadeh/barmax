@@ -1,29 +1,32 @@
-import useLightStore from "../../stores/useLightStore";
+import useLightStore from "../stores/useLightStore";
 
 interface Props {
   titleFilter: (title: string) => void;
+  plcHolder: string;
+  className?: string
+  inputClass?: string
 }
 
-const CargoTitleFilter = ({ titleFilter }: Props) => {
+const TitleFilter = ({ titleFilter, plcHolder, className, inputClass }: Props) => {
   const { light } = useLightStore();
 
   return (
-    <div className="relative w-[227px]  ">
+    <div className={`relative w-[227px] ${className}`}>
       <input
         onChange={(event) => titleFilter(event.target.value)}
         type="text"
-        placeholder="جستجو بر اساس نام..."
+        placeholder={plcHolder}
         className={` p-4 pr-2 pl-9 w-full rounded-3xl ${
           light ? "bg-[#f9fafc]" : "bg-[#0e1b2b] shadow-md"
-        }  placeholder:text-[#b0b1b5] text-[12px]`}
+        }  placeholder:text-[#b0b1b5] text-[12px] ${inputClass}`}
       />
 
-      <button className="absolute top-[50%] translate-y-[-50%] left-3">
+      <button className=" pointer-events-none absolute top-[50%] translate-y-[-50%] left-3">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 24 24"
           fill="currentColor"
-          className="size-6 "
+          className="size-6"
         >
           <path
             fillRule="evenodd"
@@ -36,4 +39,4 @@ const CargoTitleFilter = ({ titleFilter }: Props) => {
   );
 };
 
-export default CargoTitleFilter;
+export default TitleFilter;

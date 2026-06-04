@@ -1,18 +1,15 @@
-
 import Box from "../../component/Box";
-import CargoUserFilters from "./CargoUserFilters";
+import CargoUserFilters from "../../component/CargoUserFilters";
 import CargoTable from "./CargoTable";
 
-
 const Cargo = () => {
+  return (
+    <Box className="gap-7">
+      <CargoUserFilters />
 
-  return <Box className="gap-7">
-
-    <CargoUserFilters />
-    
-    <CargoTable />
-
-  </Box>;
+      <CargoTable />
+    </Box>
+  );
 };
 
 export default Cargo;

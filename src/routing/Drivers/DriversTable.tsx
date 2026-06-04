@@ -1,10 +1,10 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import useLightStore from "../../stores/useLightStore";
-import CargoTablesRows from "./CargoTablesRows";
+import DriversTablesRows from "./DriversTablesRows";
 import useCargoStore from "../../stores/useCargoStore";
 
-const CargoTable = () => {
+const DriversTable = () => {
   const [cargoData2, setCargoData2] = useState([
     {
       id: 1,
@@ -66,21 +66,14 @@ const CargoTable = () => {
                 light ? "bg-[#f9fafc]" : "bg-[#0e1b2b]"
               } rounded-tr-full rounded-br-full`}
             >
-              عنوان
+              راننده
             </td>
             <td
               className={`text-center pt-4 pb-4 ${
                 light ? "bg-[#f9fafc]" : "bg-[#0e1b2b]"
               }`}
             >
-              مبدا
-            </td>
-            <td
-              className={`text-center pt-4 pb-4 ${
-                light ? "bg-[#f9fafc]" : "bg-[#0e1b2b]"
-              }`}
-            >
-              مقصد
+              شماره پلاک
             </td>
             <td
               className={`text-center pt-4 pb-4 ${
@@ -94,15 +87,52 @@ const CargoTable = () => {
                 light ? "bg-[#f9fafc]" : "bg-[#0e1b2b]"
               }`}
             >
-              تناژ
+
+
+              <div className="flex justify-center items-center gap-2  ">
+                <span>شهر</span>
+
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth={1.5}
+                  stroke="currentColor"
+                  className="size-6"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M3 7.5 7.5 3m0 0L12 7.5M7.5 3v13.5m13.5 0L16.5 21m0 0L12 16.5m4.5 4.5V7.5"
+                  />
+                </svg>
+              </div>
             </td>
             <td
               className={`text-center pt-4 pb-4 ${
                 light ? "bg-[#f9fafc]" : "bg-[#0e1b2b]"
               }`}
             >
-              قیمت
+              <div className="flex justify-center items-center gap-2  ">
+                <span>بارهای حمل شده</span>
+
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth={1.5}
+                  stroke="currentColor"
+                  className="size-6"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M3 7.5 7.5 3m0 0L12 7.5M7.5 3v13.5m13.5 0L16.5 21m0 0L12 16.5m4.5 4.5V7.5"
+                  />
+                </svg>
+              </div>
             </td>
+
             <td
               className={`text-center pt-4 pb-4 ${
                 light ? "bg-[#f9fafc]" : "bg-[#0e1b2b]"
@@ -111,7 +141,7 @@ const CargoTable = () => {
           </tr>
         </thead>
         <tbody className="w-full ">
-          <CargoTablesRows cargoData={cargoes} />
+          <DriversTablesRows cargoData={cargoes} />
         </tbody>
       </table>
       {isError && <span>{isError}</span>}
@@ -119,4 +149,4 @@ const CargoTable = () => {
   );
 };
 
-export default CargoTable;
+export default DriversTable;

@@ -7,18 +7,20 @@ interface Props {
   };
   className?: string;
   children?: ReactNode;
-  type: "submit" | "reset" | "button" | undefined
+  type: "submit" | "reset" | "button" | undefined;
+  disabled?: any
 }
 
-const Button = ({ children, btnDetails, className, type }: Props) => {
+const Button = ({ children, btnDetails, className, type, disabled }: Props) => {
   return (
     <button
-    type={type}
-      onClick={() => btnDetails?.btnFnc}
-      className={`bg-[#536dfe] text-white flex justify-center items-center rounded-3xl w-[161px] text-[14px] cursor-pointer ${className}`}
+    disabled={disabled}
+      type={type}
+      onClick={btnDetails?.btnFnc}
+      className={`bg-[#536dfe] text-white flex justify-center items-center rounded-3xl min-w-[161px] text-[14px] cursor-pointer ${className}`}
     >
-      {btnDetails?.btnTxt && btnDetails.btnTxt}
       {children && children}
+      {btnDetails?.btnTxt && btnDetails.btnTxt}
     </button>
   );
 };

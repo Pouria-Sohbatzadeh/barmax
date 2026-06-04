@@ -1,10 +1,15 @@
 import { Link } from "react-router";
-import Button from "../../component/Button";
+import Button from "./Button";
 
-const SubmitCargoLink = () => {
+interface Props {
+  path: string,
+  txt: string
+}
+
+const SubmitLink = ({path, txt}: Props) => {
   return (
-    <Link to={"/cargo/submit"}>
-      <Button type={undefined} className="gap-3 pt-[14px] pb-[14px]">
+    <Link to={path}>
+      <Button type="button" className="gap-3 pt-[14px] pb-[14px]">
         <div className="p-[2px]  border border-white rounded-md flex justify-center items-center">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -20,10 +25,10 @@ const SubmitCargoLink = () => {
           </svg>
         </div>
 
-        <span>ثبت بار</span>
+        <span>{txt}</span>
       </Button>
     </Link>
   );
 };
 
-export default SubmitCargoLink;
+export default SubmitLink;

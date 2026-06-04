@@ -33,7 +33,7 @@ const NavigationMenu = () => {
       icon: DriversIcon,
     },
     {
-      path: "/notice",
+      path: "/letmeknow",
       txt: "باخبر شو",
       icon: NotificationIcon,
     },
@@ -54,8 +54,8 @@ const NavigationMenu = () => {
 
   return (
     <ul
-      className={`flex flex-col bg-[#536dfe] text-white rounded-lg p-3 h-[97.5vh] text-right sticky ${
-        isOpen ? "w-[265px]" : "w-[80px] pt-7"
+      className={`flex flex-col bg-[#536dfe] text-white rounded-3xl p-3 h-[97.5vh] text-right sticky ${
+        isOpen ? "w-[256px]" : "w-[80px] pt-7"
       } `}
     >
       {/* Header */}
