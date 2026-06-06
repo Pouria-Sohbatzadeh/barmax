@@ -9,7 +9,8 @@ interface Props {
   plcHolder: string;
   className?: string;
   inputType: string;
-  icon: ComponentType<IconProps>;
+  inputClass?: string
+  icon?: ComponentType<IconProps>;
   iconClass?: string;
   disabled?: boolean;
 
@@ -23,6 +24,7 @@ const SubmitInput = ({
   icon: Icon,
   iconClass,
   inputType,
+  inputClass,
   disabled,
   value,
   onChange,
@@ -47,7 +49,7 @@ const SubmitInput = ({
         onChange={onChange}
         className={`p-4 pr-12 pl-11 w-full rounded-3xl ${
           light ? "bg-[#f9fafc]" : "bg-[#0e1b2b] shadow-md"
-        } placeholder:text-[#b0b1b5] text-[12px]`}
+        } placeholder:text-[#b0b1b5] text-[12px] ${inputClass}`}
       />
     </div>
   );

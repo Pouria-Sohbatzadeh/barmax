@@ -1,7 +1,7 @@
 import Box from "../../component/Box";
 import DriversUserFilters from "../../component/DriversUserFilters";
-import DriversTable from "./DriversTable";
 
+import DriversTable from "./DriversTable";
 
 const Cargo = () => {
   return (
@@ -9,6 +9,8 @@ const Cargo = () => {
       <DriversUserFilters />
 
       <DriversTable />
+
+      {/* <Popup visibility={true} /> */}
     </Box>
   );
 };

@@ -2,33 +2,14 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import useLightStore from "../../stores/useLightStore";
 import DriversTablesRows from "./DriversTablesRows";
-import useCargoStore from "../../stores/useCargoStore";
 
-const DriversTable = () => {
-  const [cargoData2, setCargoData2] = useState([
-    {
-      id: 1,
-      title: "بار سیمان به مشهد",
-      origin: "باسمنج",
-      destination: "بخشایش",
-      vehicle: "خاور اتاق چوبی روباز",
-      tonnage: "تناژ آزاد",
-      price: "500,000 تومان",
-    },
-    {
-      id: 2,
-      title: "بار گندم به تبریز",
-      origin: "اهر",
-      destination: "مراغه",
-      vehicle: "نیسان",
-      tonnage: "3 تن",
-      price: "350,000 تومان",
-    },
-  ]);
+interface Props {
+  tableClass?: string
+}
 
-  const filteredCargoData = useCargoStore((state) => state.filteredCargoData);
+const DriversTable = ({tableClass}: Props) => {
 
-  const cargoes = filteredCargoData();
+
 
   const [isError, setIsError] = useState("");
 
@@ -38,14 +19,14 @@ const DriversTable = () => {
     setIsLoading(true);
 
     axios
-      .get("https://api.barmax.ir/api/v2/cargos", {
+      .get("https://api.barmax.ir/api/v2/drivers/current-driver-turn", {
         headers: {
           Authorization: "sanctum",
         },
       })
       .then((res) => {
         console.log(res.data);
-        setCargoData2(res.data);
+
       })
       .catch((err) => {
         console.log(err.response?.data);
@@ -58,7 +39,7 @@ const DriversTable = () => {
 
   return (
     <>
-      <table className="w-full text-[14px] border-separate border-spacing-y-4">
+      <table className={`w-full text-[14px] border-separate border-spacing-y-4 ${tableClass}`}>
         <thead className="w-full  text-[#6e7178]">
           <tr className="w-full ">
             <td
@@ -141,7 +122,7 @@ const DriversTable = () => {
           </tr>
         </thead>
         <tbody className="w-full ">
-          <DriversTablesRows cargoData={cargoes} />
+          <DriversTablesRows />
         </tbody>
       </table>
       {isError && <span>{isError}</span>}

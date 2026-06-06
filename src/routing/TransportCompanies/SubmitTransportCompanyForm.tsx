@@ -1,9 +1,10 @@
 import CancelBtn from "../../component/CancelBtn";
-import SubmitCargoInput from "../../component/SubmitInput";
+import SubmitInput from "../../component/SubmitInput";
 import PhoneIcon from "../../Icons/SubmitCargoIcons/PhoneIcon";
 import UserIcon from "../../Icons/UserIcon";
 import Button from "../../component/Button";
 import useLightStore from "../../stores/useLightStore";
+import PopupBg from "../../component/PopupBg";
 
 interface SubmitBtn {
   btnTxt: string;
@@ -26,7 +27,7 @@ const SubmitTransportCompanyForm = ({
   return (
     <>
       {visibility && (
-        <div className="absolute left-0 top-0 w-full h-full bg-[#000000d2] backdrop-blur-sm">
+        <PopupBg>
           <form
             className={`flex flex-col justify-between rounded-3xl absolute left-3 top-3 p-4 pl-6 pr-6 h-[97.5vh] ${
               light ? "bg-[#f9fafc]" : "bg-[#1b263a]"
@@ -35,21 +36,21 @@ const SubmitTransportCompanyForm = ({
             <div className="self-center flex flex-col gap-6 w-full">
               <h1 className="text-[24px] font-bold ">افزودن افراتور</h1>
 
-              <SubmitCargoInput
+              <SubmitInput
                 icon={UserIcon}
                 inputType="text"
                 plcHolder="نام"
                 className="w-full"
               />
 
-              <SubmitCargoInput
+              <SubmitInput
                 icon={UserIcon}
                 inputType="text"
                 plcHolder="نام خانوادگی"
                 className="w-full"
               />
 
-              <SubmitCargoInput
+              <SubmitInput
                 icon={PhoneIcon}
                 iconClass="left-3"
                 inputType="tel"
@@ -83,7 +84,7 @@ const SubmitTransportCompanyForm = ({
               </Button>
             </div>
           </form>
-        </div>
+        </PopupBg>
       )}
     </>
   );
