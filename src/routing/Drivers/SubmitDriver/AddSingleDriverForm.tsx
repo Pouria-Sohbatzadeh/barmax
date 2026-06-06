@@ -9,7 +9,8 @@ import PopupBg from "../../../component/PopupBg";
 import SelectFilter from "../../../component/SelectFilter";
 import TransportIcon from "../../../Icons/CargoSelectFilters/TransportIcon";
 import OriginPointIcon from "../../../Icons/CargoSelectFilters/OriginPointIcon";
-import useCargoStore from "../../../stores/useCargoStore";
+import { useState } from "react";
+import useDriverStore from "../../../stores/useDriverStore";
 
 interface SubmitBtn {
   btnTxt: string;
@@ -22,13 +23,34 @@ interface Props {
   closeForm: () => void;
 }
 
-const AddSingleDriverForm = ({ visibility = true, submitDetail, closeForm }: Props) => {
+const AddSingleDriverForm = ({
+  visibility = true,
+  submitDetail,
+  closeForm,
+}: Props) => {
   const { light } = useLightStore();
 
-  const updateFilter = useCargoStore((state) => state.updateFilter);
+  const addDriver = useDriverStore((state) => state.addDriver);
+
+  const [form, setForm] = useState({
+    licenseLetter: "",
+    name: "",
+    lastName: "",
+    phone: "",
+    city: "",
+    transport: "",
+    nationalCode: "",
+  });
+
+  const updateForm = (key: keyof typeof form, value: string) => {
+    setForm((prev) => ({
+      ...prev,
+      [key]: value,
+    }));
+  };
 
   const originPointSelect = {
-    lblTxt: "فیلتر شهر",
+    lblTxt: "شهر",
     id: "origin",
     options: [
       { value: "زاهدان", optTxt: "زاهدان" },
@@ -37,7 +59,7 @@ const AddSingleDriverForm = ({ visibility = true, submitDetail, closeForm }: Pro
   };
 
   const transportSelect = {
-    lblTxt: "فیلتر ناوگان",
+    lblTxt: "ناوگان",
     id: "transport",
     options: [
       { value: "خودرو", optTxt: "خودرو" },
@@ -45,34 +67,74 @@ const AddSingleDriverForm = ({ visibility = true, submitDetail, closeForm }: Pro
     ],
   };
 
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+
+    addDriver({
+      name: form.name,
+      last_name: form.lastName,
+      phone: form.phone,
+
+      city: form.city,
+      transport: form.transport,
+
+      carriedLoads: 0,
+
+      license_plate_part_a: String(Math.floor(Math.random() * 90 + 10)),
+      license_plate_part_b: String(Math.floor(Math.random() * 900 + 100)),
+      license_plate_part_c: form.licenseLetter || "الف",
+      license_plate_part_d: String(Math.floor(Math.random() * 90 + 10)),
+    });
+
+    setForm({
+      licenseLetter: "",
+      name: "",
+      lastName: "",
+      phone: "",
+      city: "",
+      transport: "",
+      nationalCode: "",
+    });
+
+    closeForm();
+  };
+
   return (
     <>
       {visibility && (
         <PopupBg>
           <form
+            onSubmit={handleSubmit}
             className={`flex flex-col justify-between rounded-3xl absolute left-3 top-3 p-4 pl-6 pr-6 h-[97.5vh] ${
               light ? "bg-[#f9fafc]" : "bg-[#1b263a]"
             } w-[365px]`}
           >
+            {/* Forms */}
             <div className="self-center flex flex-col gap-6 w-full">
               <div className="flex flex-col items-center gap-4">
-              <h1 className="text-[24px] font-bold">
-                افزودن راننده
-              </h1>
-              <SubmitInput
-                inputType="text"
-                plcHolder="حرف"
-                className="w-[80%]"
-                inputClass={`${light ? "bg-white" : "bg-[#0e1b2b]"} placeholder:relative placeholder:text-[20px] placeholder:right-[100px]`}
-              />
+                <h1 className="text-[24px] font-bold">افزودن راننده</h1>
+
+                <SubmitInput
+                  inputType="text"
+                  plcHolder="حرف"
+                  className="w-[80%]"
+                  value={form.licenseLetter}
+                  onChange={(e) =>
+                    updateForm("licenseLetter", e.target.value)
+                  }
+                  inputClass={`${
+                    light ? "bg-white" : "bg-[#0e1b2b]"
+                  } placeholder:relative placeholder:text-[20px] placeholder:right-[100px]`}
+                />
               </div>
-              
 
               <SubmitInput
                 icon={UserIcon}
                 inputType="text"
                 plcHolder="نام"
                 className="w-full mt-8"
+                value={form.name}
+                onChange={(e) => updateForm("name", e.target.value)}
                 inputClass={`${light ? "bg-white" : "bg-[#0e1b2b]"}`}
               />
 
@@ -81,14 +143,16 @@ const AddSingleDriverForm = ({ visibility = true, submitDetail, closeForm }: Pro
                 inputType="text"
                 plcHolder="نام خانوادگی"
                 className="w-full"
+                value={form.lastName}
+                onChange={(e) => updateForm("lastName", e.target.value)}
                 inputClass={`${light ? "bg-white" : "bg-[#0e1b2b]"}`}
               />
 
               <SelectFilter
                 selectData={originPointSelect}
                 icon={OriginPointIcon}
-                sendSelectedOption={(selectedOption) =>
-                  updateFilter("origin", selectedOption)
+                sendSelectedOption={(value) =>
+                  updateForm("city", value)
                 }
                 className="w-full"
               />
@@ -96,8 +160,8 @@ const AddSingleDriverForm = ({ visibility = true, submitDetail, closeForm }: Pro
               <SelectFilter
                 selectData={transportSelect}
                 icon={TransportIcon}
-                sendSelectedOption={(selectedOption) =>
-                  updateFilter("transport", selectedOption)
+                sendSelectedOption={(value) =>
+                  updateForm("transport", value)
                 }
                 className="w-full"
               />
@@ -108,6 +172,8 @@ const AddSingleDriverForm = ({ visibility = true, submitDetail, closeForm }: Pro
                 inputType="tel"
                 plcHolder="شماره تماس"
                 className="w-full"
+                value={form.phone}
+                onChange={(e) => updateForm("phone", e.target.value)}
                 inputClass={`${light ? "bg-white" : "bg-[#0e1b2b]"}`}
               />
 
@@ -116,10 +182,15 @@ const AddSingleDriverForm = ({ visibility = true, submitDetail, closeForm }: Pro
                 inputType="number"
                 plcHolder="کد ملی"
                 className="w-full"
+                value={form.nationalCode}
+                onChange={(e) =>
+                  updateForm("nationalCode", e.target.value)
+                }
                 inputClass={`${light ? "bg-white" : "bg-[#0e1b2b]"}`}
               />
             </div>
 
+            {/* Actions */}
             <div className="flex gap-2">
               <CancelBtn handleCancel={closeForm} />
 

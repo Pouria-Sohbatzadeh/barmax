@@ -18,6 +18,8 @@ export interface Driver {
   license_plate_part_d: string;
 }
 
+export type NewDriver = Omit<Driver, "id">;
+
 interface Filters {
   title: string;
   origin: string;
@@ -31,7 +33,7 @@ interface DriverStore {
 
   updateFilter: (key: keyof Filters, value: string) => void;
 
-  addDriver: (driver: Omit<Driver, "id">) => void;
+  addDriver: (driver: NewDriver) => void;
 
   filteredDrivers: () => Driver[];
 }
