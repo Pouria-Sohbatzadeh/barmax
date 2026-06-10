@@ -1,4 +1,4 @@
-import { Outlet } from "react-router";
+import { Outlet, useLocation } from "react-router";
 import Header from "../component/Header/Header";
 import NavigationMenu from "../component/NavigationMenu/NavigationMenu";
 
@@ -7,6 +7,8 @@ import useLightStore from "../stores/useLightStore";
 const Layout = () => {
   const { light } = useLightStore();
 
+  const location = useLocation();
+
   return (
     <>
       <div
@@ -14,10 +16,10 @@ const Layout = () => {
           light ? "bg-[#f9fafc] text-black" : "bg-[#0e1b2b] text-white"
         } `}
       >
-        <NavigationMenu />
+        {location.pathname !== "/login" && <NavigationMenu />}
 
         <div className="flex flex-col flex-grow">
-          <Header />
+          {location.pathname !== "/login" && <Header />}
 
           <Outlet />
         </div>

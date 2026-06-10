@@ -11,6 +11,7 @@ import TransportCompanies from "./routing/TransportCompanies/TransportCompanies"
 import LetMeKnow from "./routing/LetmeKnow/LetMeKnow";
 import SubmitLetMeKnowForm from "./routing/LetmeKnow/SubmitLetMeKnowForm";
 import SendMessage from "./routing/SendMessage/SendMessage";
+import Login from "./routing/Login/Login";
 
 const router = createBrowserRouter([
   {
@@ -79,6 +80,13 @@ const router = createBrowserRouter([
         element: <TransportCompanies />,
         handle: {
           title: "متصدیان",
+        },
+      },
+      {
+        path: "login",
+        element: <Login />,
+        handle: {
+          title: "Login",
         },
       },
     ],

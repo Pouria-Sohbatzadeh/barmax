@@ -1,8 +1,3 @@
-import { useEffect, useState } from "react";
-import { useForm } from "react-hook-form";
-import LogPhone from "./LogPhone";
-import FixingPhone from "./FixingPhone";
-import LogConfirmCode from "./LogConfirmCode";
 import ModeSwitchBTN from "../../component/Header/ModeSwitchBTN";
 import useLightStore from "../../stores/useLightStore";
 
